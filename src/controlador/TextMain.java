@@ -1,5 +1,7 @@
 package controlador;
 
+import vista.Login;
+
 /**
  *
  * @author juana
@@ -7,6 +9,9 @@ package controlador;
 public class TextMain {
 
     public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
+        });
         
     }
     
