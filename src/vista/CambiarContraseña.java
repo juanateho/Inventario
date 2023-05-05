@@ -25,7 +25,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         btnGuardarContraseña = new javax.swing.JButton();
         btnCancelarContraseña = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cambiar contraseña");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N

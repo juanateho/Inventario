@@ -1,15 +1,19 @@
 package vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author juana
  */
 public class Login extends javax.swing.JFrame {
 
+    static String usuario, contraseña;
+    
     public Login() {
         initComponents();
     }
-
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,8 +112,18 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+        usuario = txtUsuario.getText();
+        contraseña = txtContraseña.getText();
         
+        if (usuario.equals("user") && contraseña.equals("password")) {
+            Principal principal = new Principal();
+            principal.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario y/o contraseña son incorrectos", "Error", HEIGHT);
+        }
     }//GEN-LAST:event_btnAccederActionPerformed
 
     public static void main(String args[]) {

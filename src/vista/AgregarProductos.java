@@ -29,7 +29,7 @@ public class AgregarProductos extends javax.swing.JFrame {
         btnGuardarProductos = new javax.swing.JButton();
         btnCancelarProductos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar productos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
