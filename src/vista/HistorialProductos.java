@@ -24,7 +24,7 @@ public class HistorialProductos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tlbSalidas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Historial de productos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

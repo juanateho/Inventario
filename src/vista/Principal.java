@@ -142,27 +142,32 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductosActionPerformed
-        
+        AgregarProductos agregarproductos = new AgregarProductos();
+        agregarproductos.setVisible(true);
     }//GEN-LAST:event_btnAgregarProductosActionPerformed
 
     private void btnConsultaEdicionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaEdicionProductosActionPerformed
-        
+        ConsultaEdicionProductos consultaedicionproductos = new ConsultaEdicionProductos();
+        consultaedicionproductos.setVisible(true);
     }//GEN-LAST:event_btnConsultaEdicionProductosActionPerformed
 
     private void btnGestionarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarInventarioActionPerformed
-        
+        GestionInventario gestioninventario = new GestionInventario();
+        gestioninventario.setVisible(true);
     }//GEN-LAST:event_btnGestionarInventarioActionPerformed
 
     private void btnHistorialProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialProductosActionPerformed
-        
+        HistorialProductos historialproductos = new HistorialProductos();
+        historialproductos.setVisible(true);
     }//GEN-LAST:event_btnHistorialProductosActionPerformed
 
     private void btnCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContraseñaActionPerformed
-        
+        CambiarContraseña cambiarcontraseña = new CambiarContraseña();
+        cambiarcontraseña.setVisible(true);
     }//GEN-LAST:event_btnCambiarContraseñaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     public static void main(String args[]) {
