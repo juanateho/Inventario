@@ -1,6 +1,6 @@
 package controlador;
 
-import vista.Login;
+import vista.Inicio;
 
 /**
  *
@@ -9,10 +9,11 @@ import vista.Login;
 public class TextMain {
 
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new Login().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Inicio().setVisible(true);
+            }
         });
-        
     }
     
 }
