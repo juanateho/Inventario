@@ -1,7 +1,6 @@
 package vista;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import modelo.SqlAgregarProductos;
 
 /**
