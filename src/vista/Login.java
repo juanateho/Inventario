@@ -1,6 +1,8 @@
 package vista;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+import modelo.Conectar;
 
 /**
  *
@@ -9,11 +11,18 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     static String usuario, contraseña;
+    Conectar connection;
     
     public Login() {
         initComponents();
     }
  
+    private void limpiar() {
+        txtUsuario.setText("");
+        txtContraseña.setText("");
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,9 +129,14 @@ public class Login extends javax.swing.JFrame {
         if (usuario.equals("user") && contraseña.equals("password")) {
             Principal principal = new Principal();
             principal.setVisible(true);
+            
+            connection = new Conectar();
+            Connection reg = connection.getConnection();
+            
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "El usuario y/o contraseña son incorrectos", "Error", HEIGHT);
+            limpiar();
         }
     }//GEN-LAST:event_btnAccederActionPerformed
 

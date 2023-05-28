@@ -1,5 +1,9 @@
 package vista;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import modelo.SqlAgregarProductos;
+
 /**
  *
  * @author juana
@@ -9,6 +13,21 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
     public ConsultaEdicionProductos() {
         initComponents();
     }
+
+    public ConsultaEdicionProductos(JTable tlbProductos) {
+        this.tlbProductos = tlbProductos;
+    }
+
+    
+    public JTable getTlbProductos() {
+        return tlbProductos;
+    }
+
+    public void setTlbProductos(JTable tlbProductos) {
+        this.tlbProductos = tlbProductos;
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -21,6 +40,7 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
         btnEliminarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tlbProductos = new javax.swing.JTable();
+        btnActualizarTabla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de productos");
@@ -75,27 +95,36 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
             tlbProductos.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
+        btnActualizarTabla.setText("Actualizar");
+        btnActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarTablaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtBuscarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(btnModificarProducto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnActualizarTabla)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnModificarProducto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,7 +137,8 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtBuscarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificarProducto)
-                    .addComponent(btnEliminarProducto))
+                    .addComponent(btnEliminarProducto)
+                    .addComponent(btnActualizarTabla))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -124,6 +154,15 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
+
+    private void btnActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaActionPerformed
+        
+        
+        SqlAgregarProductos prodSql = new SqlAgregarProductos();
+        
+        prodSql.MostrarProductos();
+        
+    }//GEN-LAST:event_btnActualizarTablaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -158,12 +197,13 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizarTabla;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnModificarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tlbProductos;
+    public javax.swing.JTable tlbProductos;
     private javax.swing.JTextField txtBuscarProductos;
     // End of variables declaration//GEN-END:variables
 }
