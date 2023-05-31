@@ -1,15 +1,12 @@
 package modelo;
 
-import com.mysql.cj.xdevapi.Result;
-import vista.ConsultaEdicionProductos;
+
 import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -38,46 +35,6 @@ public class SqlAgregarProductos extends Conectar {
         } catch (SQLException ex) {
             Logger.getLogger(SqlAgregarProductos.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }
-
-    }
-
-    public void MostrarProductos() {
-        String sql = "SELECT id, nombre, descripcion, precio, proveedor, tipo FROM inventario";
-
-        Statement st;
-
-        String[] dato = new String[5];
-        
-        DefaultTableModel model = new DefaultTableModel();
-                model.addColumn("ID");
-                model.addColumn("Nombre");
-                model.addColumn("Descripción");
-                model.addColumn("Precio");
-                model.addColumn("Proveedor");
-                model.addColumn("Tipo");
-
-                ConsultaEdicionProductos tabla = new ConsultaEdicionProductos();
-
-                tabla.tlbProductos.setModel(model);
-
-        try {
-            st = con.createStatement();
-            ResultSet result = st.executeQuery(sql);
-
-            while (result.next()) {
-                dato[0] = result.getString(1);
-                dato[1] = result.getString(2);
-                dato[2] = result.getString(4);
-                dato[3] = result.getString(3);
-                dato[4] = result.getString(7);
-                dato[5] = result.getString(5);
-                
-                model.addRow(dato);
-
-                
-            }
-        } catch (Exception e) {
         }
 
     }

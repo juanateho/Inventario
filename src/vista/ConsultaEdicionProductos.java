@@ -1,7 +1,12 @@
 package vista;
 
-import javax.swing.JTable;
-import modelo.SqlAgregarProductos;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Conectar;
+
 
 /**
  *
@@ -9,23 +14,92 @@ import modelo.SqlAgregarProductos;
  */
 public class ConsultaEdicionProductos extends javax.swing.JFrame {
 
+    Conectar conexion = new Conectar();
+    Connection con = conexion.getConnection();
+
     public ConsultaEdicionProductos() {
         initComponents();
+        MostrarDatos();
+
     }
 
-    public ConsultaEdicionProductos(JTable tlbProductos) {
-        this.tlbProductos = tlbProductos;
-    }
+    private void MostrarDatos() {
 
+        String sql = "SELECT * FROM inventario";
+        Statement st;
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("Descripción");
+        model.addColumn("Precio c/u");
+        model.addColumn("Proveedor");
+        model.addColumn("Tipo");
+
+        tlbProductos.setModel(model);
+
+        String[] dato = new String[6];
+
+        try {
+            st = con.createStatement();
+            ResultSet result = st.executeQuery(sql);
+
+            while (result.next()) {
+                dato[0] = result.getString(1);
+                dato[1] = result.getString(2);
+                dato[2] = result.getString(4);
+                dato[3] = result.getString(3);
+                dato[4] = result.getString(7);
+                dato[5] = result.getString(5);
+                model.addRow(dato);
+            }
+
+            tlbProductos.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaEdicionProductos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex + "Error en la consulta.");
+        }
+    }
     
-    public JTable getTlbProductos() {
-        return tlbProductos;
-    }
-
-    public void setTlbProductos(JTable tlbProductos) {
-        this.tlbProductos = tlbProductos;
+    public void ModificarDatos() {
+        
+        int fila = tlbProductos.getSelectedRow();
+        
+        String valor =tlbProductos.getValueAt(fila, 0).toString();
+        
+        String nombre = tlbProductos.getValueAt(fila, 1).toString();
+        String descripcion = tlbProductos.getValueAt(fila, 2).toString();
+        String precio = tlbProductos.getValueAt(fila, 3).toString();
+        String proveedor = tlbProductos.getValueAt(fila, 4).toString();
+        String tipo = tlbProductos.getValueAt(fila, 5).toString();
+        
+         String sql = " UPDATE inventario SET nombre='"+nombre+"',descripcion='"+descripcion+"',precio='"+precio+"',proveedor='"+proveedor+"',tipo='"+tipo+"' WHERE id='"+valor+"' ";
+        
+        try {
+            PreparedStatement modify = con.prepareStatement(sql);
+            modify.executeUpdate();
+            MostrarDatos();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e + "No se logró actualizar los datos.");
+        }
     }
     
+    public void EliminarDatos() {
+        int fila = tlbProductos.getSelectedRow();
+        
+        String valor =tlbProductos.getValueAt(fila, 0).toString();
+        
+        String sql = "DELETE FROM inventario WHERE id = '"+valor+"'";
+        
+        try {
+            PreparedStatement delete = con.prepareStatement(sql);
+            delete.executeUpdate();
+            MostrarDatos();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e + "No se logró eliminar el dato.");
+        }
+    }
     
 
     @SuppressWarnings("unchecked")
@@ -37,9 +111,9 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
         txtBuscarProductos = new javax.swing.JTextField();
         btnModificarProducto = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tlbProductos = new javax.swing.JTable();
         btnActualizarTabla = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tlbProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de productos");
@@ -48,6 +122,12 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
         jLabel1.setText("Formulario para la gestión de productos");
 
         jLabel2.setText("Buscar:");
+
+        txtBuscarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarProductosActionPerformed(evt);
+            }
+        });
 
         btnModificarProducto.setText("Modificar");
         btnModificarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -63,37 +143,6 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
             }
         });
 
-        tlbProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                { new Integer(12), "Cuaderno 50 hojas", "Pequeño", "2.500", "Norma", "Papelería"},
-                { new Integer(62), "Chocorramo", "Ponqué", "3.500", "Ramo", null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nombre", "Descripción", "Precio c/u", "Proveedor", "Tipo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tlbProductos.setToolTipText("");
-        jScrollPane1.setViewportView(tlbProductos);
-        if (tlbProductos.getColumnModel().getColumnCount() > 0) {
-            tlbProductos.getColumnModel().getColumn(0).setPreferredWidth(2);
-            tlbProductos.getColumnModel().getColumn(2).setPreferredWidth(60);
-            tlbProductos.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tlbProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tlbProductos.getColumnModel().getColumn(5).setPreferredWidth(50);
-        }
-
         btnActualizarTabla.setText("Actualizar");
         btnActualizarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,29 +150,40 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
             }
         });
 
+        tlbProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tlbProductos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtBuscarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                            .addComponent(btnActualizarTabla)
+                            .addGap(12, 12, 12)
+                            .addComponent(btnModificarProducto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnActualizarTabla)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnModificarProducto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,30 +198,29 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
                     .addComponent(btnModificarProducto)
                     .addComponent(btnEliminarProducto)
                     .addComponent(btnActualizarTabla))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProductoActionPerformed
-        
+        ModificarDatos();
     }//GEN-LAST:event_btnModificarProductoActionPerformed
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
-        
+        EliminarDatos();
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void btnActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaActionPerformed
-        
-        
-        SqlAgregarProductos prodSql = new SqlAgregarProductos();
-        
-        prodSql.MostrarProductos();
-        
+        MostrarDatos();
     }//GEN-LAST:event_btnActualizarTablaActionPerformed
+
+    private void txtBuscarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarProductosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -201,8 +260,8 @@ public class ConsultaEdicionProductos extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable tlbProductos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tlbProductos;
     private javax.swing.JTextField txtBuscarProductos;
     // End of variables declaration//GEN-END:variables
 }
