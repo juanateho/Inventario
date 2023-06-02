@@ -1,11 +1,6 @@
 package vista;
 
-import com.sun.jdi.connect.spi.Connection;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.Conectar;
 import modelo.Productos;
 import modelo.SqlAgregarProductos;
 
@@ -18,6 +13,7 @@ public class AgregarProductos extends javax.swing.JFrame {
 
     public AgregarProductos() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     private void limpiar() {
@@ -178,8 +174,6 @@ public class AgregarProductos extends javax.swing.JFrame {
 
     private void btnGuardarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductosActionPerformed
         
-        //ArrayList<Productos> pr = new  ArrayList<>();
-        
         SqlAgregarProductos prodSql = new SqlAgregarProductos();
         Productos prod = new  Productos();
         
@@ -195,35 +189,6 @@ public class AgregarProductos extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(rootPane, "Error al guardar.");
         }
-        
-        /*
-        String nombre = txtNombre.getText();
-        String descripcion = txtDescripcion.getText();
-        String precio = txtPrecio.getText();
-        String proveedor = txtProveedor.getText();
-        String tipo = txtTipo.getText();
-        String unidades = txtUnidades.getText();
-        Productos p; 
-        
-        p = new Productos(nombre, descripcion, precio, proveedor, tipo, unidades);
-        
-        pr.add(p);
-        
-        File f = new File("Productos.csv");
-        
-        try (FileWriter fw = new FileWriter(f, true);) {
-         
-            for (Productos productos : pr) {
-                fw.write(productos.toCSV() + "\n");
-                JOptionPane.showMessageDialog(rootPane, "Registro exitoso.");
-                fw.close();
-            }
-            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error al guardar los datos.");
-        }*/
-    
         limpiar();
     
     }//GEN-LAST:event_btnGuardarProductosActionPerformed

@@ -1,14 +1,50 @@
 package vista;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import modelo.Conectar;
+
 /**
  *
  * @author juana
  */
 public class CambiarContraseña extends javax.swing.JFrame {
 
+    Conectar conexion = new Conectar();
+    Connection con = conexion.getConnection();
+    
     public CambiarContraseña() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
+
+    private void limpiar() {
+        txtNuevaContraseña.setText("");
+        txtRepetirContraseña.setText("");
+    }
+    
+    public void Cambiar() {
+
+        String sql = " UPDATE sesion SET contraseña='" + txtNuevaContraseña.getText() + "'";
+
+            if (txtNuevaContraseña.getText().equals(txtRepetirContraseña.getText())) {
+                try {
+                    PreparedStatement modify = con.prepareStatement(sql);
+                    modify.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "La contraseña ha sido modificada.");
+                    this.dispose();
+                    
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e + "No se logró modificar la contraseña.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+                limpiar();
+            }
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -16,8 +52,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtContraseñaActual = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtNuevaContraseña = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -30,8 +64,6 @@ public class CambiarContraseña extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setText("Registro de productos");
-
-        jLabel2.setText("Contraseña actual:");
 
         jLabel3.setText("Nueva contraseña:");
 
@@ -62,18 +94,15 @@ public class CambiarContraseña extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2))
+                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtContraseñaActual)
                                     .addComponent(txtNuevaContraseña)
                                     .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+                        .addGap(78, 78, 78)
                         .addComponent(btnGuardarContraseña)
                         .addGap(31, 31, 31)
                         .addComponent(btnCancelarContraseña)))
@@ -84,11 +113,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtContraseñaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNuevaContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -96,11 +121,11 @@ public class CambiarContraseña extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarContraseña)
                     .addComponent(btnCancelarContraseña))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,11 +149,11 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarContraseñaActionPerformed
-        
+        Cambiar();
     }//GEN-LAST:event_btnGuardarContraseñaActionPerformed
 
     private void btnCancelarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarContraseñaActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_btnCancelarContraseñaActionPerformed
 
     public static void main(String args[]) {
@@ -167,12 +192,10 @@ public class CambiarContraseña extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelarContraseña;
     private javax.swing.JButton btnGuardarContraseña;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtContraseñaActual;
-    private javax.swing.JTextField txtNuevaContraseña;
-    private javax.swing.JTextField txtRepetirContraseña;
+    public javax.swing.JTextField txtNuevaContraseña;
+    public javax.swing.JTextField txtRepetirContraseña;
     // End of variables declaration//GEN-END:variables
 }

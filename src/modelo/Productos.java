@@ -14,10 +14,6 @@ public class Productos {
     private String unidades;
 
 
-   /*public String toCSV() {
-        return this.nombre + "," + this.descripcion + "," + this.precio + "," + this.proveedor + "," + this.tipo + "," + this.unidades;
-    }*/
-
     public String getNombre() {
         return nombre;
     }

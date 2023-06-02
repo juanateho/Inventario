@@ -8,6 +8,7 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,7 +20,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnConsultaEdicionProductos = new javax.swing.JButton();
         btnGestionarInventario = new javax.swing.JButton();
-        btnHistorialProductos = new javax.swing.JButton();
         btnCambiarContraseña = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnAgregarProductos = new javax.swing.JButton();
@@ -45,14 +45,6 @@ public class Principal extends javax.swing.JFrame {
         btnGestionarInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionarInventarioActionPerformed(evt);
-            }
-        });
-
-        btnHistorialProductos.setText("Historial de Entradas y Salidas");
-        btnHistorialProductos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnHistorialProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialProductosActionPerformed(evt);
             }
         });
 
@@ -90,7 +82,6 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnConsultaEdicionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGestionarInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHistorialProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCambiarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnAgregarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -113,12 +104,10 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGestionarInventario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnHistorialProductos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCambiarContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,11 +144,6 @@ public class Principal extends javax.swing.JFrame {
         GestionInventario gestioninventario = new GestionInventario();
         gestioninventario.setVisible(true);
     }//GEN-LAST:event_btnGestionarInventarioActionPerformed
-
-    private void btnHistorialProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialProductosActionPerformed
-        HistorialProductos historialproductos = new HistorialProductos();
-        historialproductos.setVisible(true);
-    }//GEN-LAST:event_btnHistorialProductosActionPerformed
 
     private void btnCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarContraseñaActionPerformed
         CambiarContraseña cambiarcontraseña = new CambiarContraseña();
@@ -210,7 +194,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnCambiarContraseña;
     private javax.swing.JButton btnConsultaEdicionProductos;
     private javax.swing.JButton btnGestionarInventario;
-    private javax.swing.JButton btnHistorialProductos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

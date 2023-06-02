@@ -1,6 +1,5 @@
 package modelo;
 
-
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
  */
 public class SqlAgregarProductos extends Conectar {
 
-    Conectar conexion = new Conectar();
     PreparedStatement ps = null;
     Connection con = getConnection();
 

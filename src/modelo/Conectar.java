@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Conectar {
             }
             System.out.println("");
 
-        } catch (Exception exception) {
+        } catch (ClassNotFoundException | SQLException exception) {
             System.out.println(exception);
         }
     }

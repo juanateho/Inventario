@@ -53,7 +53,6 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnConsultaEdicionProductos" max="32767" attributes="0"/>
                           <Component id="btnGestionarInventario" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnHistorialProductos" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnCambiarContraseña" alignment="0" min="-2" pref="405" max="-2" attributes="0"/>
                           <Component id="btnSalir" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           <Component id="btnAgregarProductos" alignment="0" max="32767" attributes="0"/>
@@ -81,12 +80,10 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnGestionarInventario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnHistorialProductos" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnCambiarContraseña" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -121,15 +118,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestionarInventarioActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnHistorialProductos">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Historial de Entradas y Salidas"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistorialProductosActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCambiarContrase&#xf1;a">
